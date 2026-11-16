@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SUNFALL YARD — Tactical FPS</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:,">
+<script type="importmap">
+{"imports": {"three": "./vendor/three/three.module.min.js"}}
+</script>
+</head>
+<body>
+<canvas id="game-canvas"></canvas>
+
+<div id="hud">
+  <div id="topbar">
+    <div id="team-label">EMBER</div>
+    <div id="scoreboard">
+      <span id="score-att">0</span><span class="score-sep">:</span><span id="score-def">0</span>
+    </div>
+    <div id="timer">1:40</div>
+    <div id="round-label">ROUND 1/15</div>
+    <div id="money">$800</div>
+  </div>
+
+  <div id="killfeed"></div>
+  <div id="radio-feed"></div>
+
+  <div id="banner" class="hidden"><div id="banner-main"></div><div id="banner-sub"></div></div>
+
+  <div id="crosshair" style="--gap:10px">
+    <span class="ch-t"></span><span class="ch-b"></span><span class="ch-l"></span><span class="ch-r"></span>
+  </div>
+  <div id="hitmarker" class="hidden"></div>
+  <div id="scope-overlay" class="hidden"></div>
+  <div id="vignette" class="hidden"></div>
+  <div id="flash-overlay" class="hidden"></div>
+
+  <div id="bomb-wrap" class="hidden">
+    <div id="bomb-label">BOMB</div>
+    <div class="bar"><div id="bomb-fill"></div></div>
+  </div>
+  <div id="channel-wrap" class="hidden">
+    <div id="channel-label">CHANNELING</div>
+    <div class="bar"><div id="channel-fill"></div></div>
+  </div>
+
+  <div id="bottom-left">
+    <div id="health-row">
+      <span id="hp-num">100</span><span class="lbl">HP</span>
+      <div class="bar hp"><div id="hp-fill"></div></div>
+      <span id="armor-num">0</span><span class="lbl">ARMOR</span>
+    </div>
+    <div id="grenades"></div>
+    <div id="bomb-indicator" class="hidden">💣 BOMB CARRIER</div>
+  </div>
+
+  <div id="bottom-right">
+    <div id="weapon-name">P9 SIDEARM</div>
+    <div id="ammo-row"><span id="ammo-mag">12</span><span class="ammo-sep">/</span><span id="ammo-res">48</span></div>
+    <div id="reload-tip" class="hidden">RELOADING…</div>
+  </div>
+
+  <canvas id="minimap" width="168" height="128"></canvas>
+  <div id="hint-bar"></div>
+</div>
+
+<div id="buy-menu" class="hidden">
+  <div class="buy-head"><h2>BUY MENU</h2><span id="buy-money">$800</span><button id="buy-close">✕ Close [B]</button></div>
+  <div id="buy-grid"></div>
+  <p class="buy-foot">Buy phase only — 1–9 quick-buy. Weapons replace your primary; armor, kit and grenades stack.</p>
+</div>
+
+<div id="start-overlay" class="overlay">
+  <div class="panel">
+    <h1>SUNFALL <span>YARD</span></h1>
+    <p class="tagline">5v5 plant-and-defuse at a desert solar farm. First to 8 rounds. Sides swap at halftime.</p>
+    <div class="brief">
+      <p><b>EMBER</b> attacks: plant the bomb at Site A or B, or eliminate Slate. <b>SLATE</b> defends: hold the sites, defuse if it plants.</p>
+      <p class="controls">WASD move · Mouse aim · Click fire · R reload · 1/2 weapons · G throw grenade · F cycle grenade · E plant/defuse (hold) · Ctrl crouch · Shift walk quietly · Space jump · B buy menu · P pause</p>
+      <p class="controls">Your four bot teammates call plays, hear gunfire, plant, defuse and throw utility. Listen for footsteps — enemies hear yours too.</p>
+    </div>
+    <button id="start-btn" class="big-btn">▶ &nbsp;DEPLOY</button>
+  </div>
+</div>
+
+<div id="pause-overlay" class="overlay hidden">
+  <div class="panel">
+    <h1>PAUSED</h1>
+    <p class="tagline">The yard waits.</p>
+    <button id="resume-btn" class="big-btn">RESUME</button>
+    <button id="restart-btn-pause" class="big-btn ghost">RESTART MATCH</button>
+  </div>
+</div>
+
+<div id="end-overlay" class="overlay hidden">
+  <div class="panel">
+    <h1 id="end-title">MATCH OVER</h1>
+    <p id="end-sub" class="tagline"></p>
+    <button id="restart-btn-end" class="big-btn">PLAY AGAIN</button>
+  </div>
+</div>
+
+<div id="death-overlay" class="hidden">
+  <div id="spectate-label">Spectating…</div>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+/* SUNFALL YARD — HUD and overlay styles. Dark glass panels, amber Ember
+   accents, teal Slate accents. All positioning is fixed over the canvas. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0c0a08; }
+body { font-family: "Segoe UI", system-ui, Arial, sans-serif; color: #f2ede4; user-select: none; }
+#game-canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.hidden { display: none !important; }
+
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+
+/* --- top bar --- */
+#topbar { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 18px; background: rgba(10, 9, 7, 0.62); border: 1px solid rgba(224, 138, 60, 0.35); border-radius: 6px; padding: 7px 18px; font-weight: 600; letter-spacing: 0.06em; }
+#team-label { color: #e08a3c; font-size: 13px; }
+#team-label.def { color: #4fae9d; }
+#scoreboard { font-size: 22px; font-weight: 800; }
+#score-att { color: #e08a3c; }
+#score-def { color: #4fae9d; }
+.score-sep { margin: 0 5px; color: #8a8272; }
+#timer { font-size: 20px; min-width: 58px; text-align: center; }
+#timer.low { color: #ff5a4e; }
+#round-label { font-size: 12px; color: #b8ae9a; }
+#money { font-size: 16px; color: #ffd98a; }
+
+/* --- feeds --- */
+#killfeed { position: absolute; top: 64px; right: 16px; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; font-size: 13px; }
+#killfeed div { background: rgba(10, 9, 7, 0.6); border-radius: 4px; padding: 3px 9px; }
+#killfeed .hs { color: #ff5a4e; font-size: 11px; font-weight: 700; }
+#radio-feed { position: absolute; left: 16px; bottom: 190px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; max-width: 300px; }
+#radio-feed div { background: rgba(10, 9, 7, 0.55); border-left: 3px solid #e08a3c; border-radius: 3px; padding: 3px 9px; }
+#radio-feed div.def { border-left-color: #4fae9d; }
+
+/* --- banner --- */
+#banner { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+#banner-main { font-size: 44px; font-weight: 900; letter-spacing: 0.08em; color: #ffd98a; }
+#banner-sub { font-size: 16px; color: #f2ede4; margin-top: 4px; }
+
+/* --- crosshair / hitmarker / overlays --- */
+#crosshair { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+#crosshair span { position: absolute; background: #ffe9c4; box-shadow: 0 0 3px rgba(0,0,0,0.9); }
+.ch-t { left: -1px; top: calc(-1 * var(--gap) - 8px); width: 2px; height: 8px; }
+.ch-b { left: -1px; top: var(--gap); width: 2px; height: 8px; }
+.ch-l { top: -1px; left: calc(-1 * var(--gap) - 8px); height: 2px; width: 8px; }
+.ch-r { top: -1px; left: var(--gap); height: 2px; width: 8px; }
+#hitmarker { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; transform: translate(-50%, -50%) rotate(45deg); border: 2px solid #ff5a4e; opacity: 0.9; }
+#scope-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 31%, rgba(0,0,0,0.97) 32%); }
+#scope-overlay::before, #scope-overlay::after { content: ""; position: absolute; background: rgba(20,20,20,0.8); }
+#scope-overlay::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+#scope-overlay::after { top: 50%; left: 0; right: 0; height: 1px; }
+#vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(200, 30, 20, 0.55) 100%); }
+#flash-overlay { position: absolute; inset: 0; background: #fff; opacity: 0; }
+
+/* --- bars --- */
+.bar { height: 8px; background: rgba(255,255,255,0.16); border-radius: 4px; overflow: hidden; }
+.bar > div { height: 100%; background: #e08a3c; width: 100%; }
+#bomb-wrap, #channel-wrap { position: absolute; left: 50%; transform: translateX(-50%); width: 320px; text-align: center; }
+#bomb-wrap { top: 108px; }
+#channel-wrap { bottom: 240px; }
+#bomb-label, #channel-label { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 5px; text-shadow: 0 1px 4px #000; }
+#bomb-fill { background: #ff5a4e; }
+#channel-fill { background: #ffd98a; }
+
+/* --- bottom clusters --- */
+#bottom-left { position: absolute; left: 18px; bottom: 18px; }
+#health-row { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+#hp-num { font-size: 34px; font-weight: 800; min-width: 62px; text-align: right; }
+#hp-num.low { color: #ff5a4e; }
+.lbl { font-size: 11px; color: #b8ae9a; letter-spacing: 0.08em; }
+.bar.hp { width: 130px; }
+#hp-fill { background: #7ec850; }
+#armor-num { font-size: 20px; font-weight: 700; color: #8ecae6; margin-left: 8px; }
+#grenades { margin-top: 6px; font-size: 14px; letter-spacing: 0.05em; color: #ffd98a; }
+#bomb-indicator { margin-top: 6px; font-size: 13px; font-weight: 700; color: #ff5a4e; }
+#bottom-right { position: absolute; right: 18px; bottom: 18px; text-align: right; }
+#weapon-name { font-size: 14px; font-weight: 700; letter-spacing: 0.1em; color: #ffd98a; }
+#ammo-row { font-size: 15px; color: #b8ae9a; }
+#ammo-mag { font-size: 34px; font-weight: 800; color: #f2ede4; }
+#ammo-mag.low { color: #ff5a4e; }
+.ammo-sep { margin: 0 4px; }
+#reload-tip { font-size: 12px; color: #ffd98a; letter-spacing: 0.1em; margin-top: 2px; }
+
+#minimap { position: absolute; right: 18px; bottom: 108px; border: 1px solid rgba(224, 138, 60, 0.4); border-radius: 4px; background: rgba(10, 9, 7, 0.6); }
+#hint-bar { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #b8ae9a; letter-spacing: 0.04em; text-shadow: 0 1px 3px #000; white-space: nowrap; }
+
+/* --- buy menu --- */
+#buy-menu { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 640px; max-width: 92vw; background: rgba(14, 12, 9, 0.94); border: 1px solid rgba(224, 138, 60, 0.5); border-radius: 10px; padding: 18px 20px; z-index: 20; pointer-events: auto; }
+.buy-head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.buy-head h2 { font-size: 22px; letter-spacing: 0.1em; flex: 1; }
+#buy-money { font-size: 20px; font-weight: 800; color: #ffd98a; }
+#buy-close { background: #2a2521; color: #f2ede4; border: 1px solid #555; border-radius: 5px; padding: 7px 12px; cursor: pointer; font-size: 13px; }
+#buy-close:hover { background: #3a332c; }
+#buy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.buy-item { background: #1d1915; border: 1px solid #4a4238; border-radius: 6px; padding: 10px 12px; cursor: pointer; text-align: left; color: #f2ede4; font-family: inherit; }
+.buy-item:hover { border-color: #e08a3c; background: #262019; }
+.buy-item.owned { border-color: #4fae9d; }
+.buy-item.cant { opacity: 0.45; cursor: default; }
+.buy-item .key { display: inline-block; background: #e08a3c; color: #111; font-weight: 800; font-size: 12px; border-radius: 3px; padding: 1px 6px; margin-right: 7px; }
+.buy-item .nm { font-weight: 700; font-size: 14px; }
+.buy-item .pr { float: right; color: #ffd98a; font-weight: 700; }
+.buy-item .ds { display: block; font-size: 12px; color: #b8ae9a; margin-top: 4px; }
+.buy-foot { margin-top: 14px; font-size: 12px; color: #b8ae9a; }
+
+/* --- overlays --- */
+.overlay { position: fixed; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center; background: rgba(8, 6, 4, 0.72); pointer-events: auto; }
+.panel { text-align: center; max-width: 640px; padding: 34px 44px; background: rgba(14, 12, 9, 0.88); border: 1px solid rgba(224, 138, 60, 0.45); border-radius: 12px; }
+.panel h1 { font-size: 52px; font-weight: 900; letter-spacing: 0.1em; }
+.panel h1 span { color: #e08a3c; }
+.tagline { margin: 10px 0 16px; color: #d8cfba; font-size: 15px; line-height: 1.5; }
+.brief { text-align: left; font-size: 13.5px; line-height: 1.6; color: #cfc5ae; margin-bottom: 20px; }
+.brief p { margin-bottom: 8px; }
+.brief b { color: #ffd98a; }
+.controls { color: #b8ae9a; font-size: 12.5px; }
+.big-btn { background: #e08a3c; color: #14100c; border: none; border-radius: 7px; padding: 13px 34px; font-size: 17px; font-weight: 800; letter-spacing: 0.08em; cursor: pointer; margin: 4px; }
+.big-btn:hover { background: #f09a4e; }
+.big-btn.ghost { background: transparent; color: #f2ede4; border: 1px solid #6a6055; }
+.big-btn.ghost:hover { border-color: #e08a3c; }
+
+#death-overlay { position: fixed; inset: 0; z-index: 6; pointer-events: none; background: linear-gradient(to bottom, rgba(120,10,5,0.18), rgba(120,10,5,0.42)); }
+#spectate-label { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); font-size: 15px; font-weight: 700; letter-spacing: 0.06em; color: #ffd98a; text-shadow: 0 1px 5px #000; }
